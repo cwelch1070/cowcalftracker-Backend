@@ -19,6 +19,7 @@ const clearAllHerds = function() {
     const removeButton = document.createElement('button')
     removeButton.textContent = 'Clear All'
     document.querySelector('body').appendChild(removeButton)
+    removeButton.className = 'btn btn-danger'
 
     removeButton.addEventListener('click', function(e) {
         localStorage.clear()
@@ -106,6 +107,7 @@ const generateDOM = function(herd) {
         const cell = document.createElement('td')
         const cell2 = document.createElement('td')
         const cell3 = document.createElement('td')
+        const cell4 = document.createElement('td')
 
         //Define variables to be hold herds data
         let textNode1 
@@ -149,14 +151,31 @@ const generateDOM = function(herd) {
         cell.appendChild(textNode1)
         cell2.appendChild(textNode2)
         cell3.appendChild(textNode3)
-        cell3.appendChild(removeBtn)
-        cell3.appendChild(editButton)
-        cell3.appendChild(addCattle)
-
+        cell4.appendChild(addCattle)
+        cell4.appendChild(editButton)
+        cell4.appendChild(removeBtn)
+        
         //Appends the cells to the row
         row.appendChild(cell)
         row.appendChild(cell2)
         row.appendChild(cell3)
+        row.appendChild(cell4)
+
+        //css and bootstrap styling
+        removeBtn.className = 'btn btn-danger btn-sm'
+
+        editButton.className = 'btn btn-warning btn-sm'
+        editButton.style.marginRight = '5px'
+
+        addCattle.className = 'btn btn-success btn-sm'
+        addCattle.style.marginRight = '5px'
+
+        cell.style.width = '300px'
+        cell2.style.width = '300px'
+        cell3.style.width = '100px'
+
+        cell4.style.textAlign = 'right'
+        cell4.style.width = '260px'
 
         //Appends entire row to the table
         table.appendChild(row)

@@ -3,7 +3,7 @@ const herds = getHerds()
 const newHerd = document.querySelector('#create-herd')
 
 generateDOM(herds)
-clearAllHerds()
+//clearAllHerds()
 
 newHerd.addEventListener('click', function(e) {
     const id = uuidv4()
