@@ -11,21 +11,33 @@
 <body>
     <div class="container">
         <h1 class="display-4">Cattle</h1>
-        <div class="input-group">
-            <span class="input-group-text">Name</span>
-            <input class="form-control" type="text" id="" placeholder="Cow Name">
-        </div>
+
+        <form>
+            <div class="input-group">
+                <span class="input-group-text">Name</span>
+                <input class="form-control" type="text" id="cow-name" placeholder="Add New Cow">
+            </div>
         
-        <div class="input-group" style="margin-top: 5px;">
-            <span class="input-group-text">Tag #</span>
-            <input class="form-control" type="number" id="" placeholder="#">
+            <div class="input-group" style="margin-top: 5px;">
+                <span class="input-group-text">Tag #</span>
+                <input class="form-control" type="number" id="tag-num" placeholder="#">
+            </div>
+            <button type="submit" class="btn btn-success" style="margin-top: 5px;" id="add-cow">Add Cow</button>
+        </form>
+        <button class="btn btn-primary" style="margin-top: -66px; margin-left: 100px;" id="back">Back to Herds</button>
+
+        <div style="margin-top: 20px;" id="display-cattle">
+            <table class="table table-hover caption-top" id="table1">
+                <caption>Your Cattle</caption>
+            </table>
         </div>
-        
-        <button class="btn btn-success" style="margin-top: 5px;">Add Cow</button>
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" 
             integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="./uuidv4.js"></script>
+    <script src="./add-functions.js"></script>
+    <script src="./add-cattle.js"></script>
 </body>
 </html>
