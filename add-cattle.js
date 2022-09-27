@@ -1,11 +1,16 @@
+//This file has to do with creation only and the id that is assigned is bound to the herdID
+//therefore the if statement is not needed. What is displayed needs to be filtered so cattle 
+//created with another herd is not displayed throughout  
 const cattle = getCattle()
+let herds = getHerds()
 
 //Gets the hash of the location and trims off the first position in which contains a #
-const cattleId = location.hash.substring(1)
+const herdId = location.hash.substring(1)
 //Checks if the herd.id in memory matches the hash
-let cows = cattle.find(function(cows) {
-    return cows.id === cattleId
+let herd = herds.find(function(herd) {
+    return herd.id === herdId
 })
+
 
 const nameCow = document.querySelector('#cow-name')
 const tagNum = document.querySelector('#tag-num')
@@ -26,11 +31,13 @@ tagNum.addEventListener('input', function(e) {
     numOfTag = e.target.value
 })
 
+
 newCow.addEventListener('click', function(e) {
     e.preventDefault()
     const id = uuidv4()
     cattle.push({
-        id: id,
+        herdId: herd.id,
+        cowId: id,
         cow: nameOfCow,
         tag: numOfTag
     })
@@ -38,7 +45,8 @@ newCow.addEventListener('click', function(e) {
     //displayCattle(cattle)
     saveCattle(cattle)
     location.reload()
-})
+})  
+
 
 back.addEventListener('click', function(e) {
     location.assign('./index.html')

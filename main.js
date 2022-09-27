@@ -17,5 +17,3 @@ newHerd.addEventListener('click', function(e) {
     saveHerds(herds)
     location.assign(`./createHerd.html#${id}`)
 })
-
-

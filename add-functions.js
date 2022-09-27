@@ -16,7 +16,25 @@ const getCattle = function() {
 
 //Displays the cattle ONLY most 
 const displayCattle = function(cows) {
+    //Store the cattle that match the current herds id
+    let foundCattle = []
 
+    //Gets the hash of the location and trims off the first position in which contains a #
+    const herdId = location.hash.substring(1)
+
+    /* 
+        Finds the cattle that have a matching id with the herd they were created under
+        The cows name and tag # are then pushed into the foundCattle object which is used to display 
+        those specfic cattle under their specific heard 
+    */
+    let findCow = cattle.find(function(findCow) {
+        if(findCow.herdId === herdId) {
+            let found = findCow.cow
+            let found2 = findCow.tag
+            foundCattle.push({found, found2}) 
+        }
+    })
+    console.log(foundCattle)
     const headers = ['Tag #', 'Cow Name']
 
     const displayCows = document.querySelector('#display-cattle')
@@ -35,7 +53,7 @@ const displayCattle = function(cows) {
     
     table.appendChild(headerRow)
     
-    cows.forEach(function(cattle) {
+    foundCattle.forEach(function(cattle) {
 
         const row = document.createElement('tr')
         const cell = document.createElement('td')
@@ -44,12 +62,12 @@ const displayCattle = function(cows) {
         let textNode1
         let textNode2
 
-        textNode1 = document.createTextNode(cattle.cow)
-        textNode2 = document.createTextNode(cattle.tag)
+        textNode1 = document.createTextNode(cattle.found)
+        textNode2 = document.createTextNode(cattle.found2)
         
         cell.appendChild(textNode1)
         cell2.appendChild(textNode2)
-
+        
         row.appendChild(cell2)
         row.appendChild(cell)
 
