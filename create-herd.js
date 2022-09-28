@@ -1,5 +1,5 @@
 //Basically creates a new array and reads herd data into the new array
-let herds = getHerds()
+const herds = getHerds()
 
 //Gets the hash of the location and trims off the first position in which contains a #
 const herdId = location.hash.substring(1)
@@ -23,7 +23,7 @@ nameHerd.addEventListener('input', function(e) {
 herdCount.addEventListener('input', function(e) {
     herd.count = e.target.value
     saveHerds(herds)
-}) 
+})  
 
 //Simple button linking back to index page
 addHerdBtn.addEventListener('click', function(e) {

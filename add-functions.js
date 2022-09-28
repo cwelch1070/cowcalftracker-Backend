@@ -14,27 +14,36 @@ const getCattle = function() {
      }
 }
 
-//Displays the cattle ONLY most 
-const displayCattle = function(cows) {
-    //Store the cattle that match the current herds id
-    let foundCattle = []
-
-    //Gets the hash of the location and trims off the first position in which contains a #
+/* const herdCount = function(cattle) {
     const herdId = location.hash.substring(1)
 
-    /* 
-        Finds the cattle that have a matching id with the herd they were created under
-        The cows name and tag # are then pushed into the foundCattle object which is used to display 
-        those specfic cattle under their specific heard 
-    */
-    let findCow = cattle.find(function(findCow) {
-        if(findCow.herdId === herdId) {
-            let found = findCow.cow
-            let found2 = findCow.tag
-            foundCattle.push({found, found2}) 
-        }
+    const result = cattle.filter(cattle => cattle.herdId === herdId)
+
+    if(herds.herdId === herdId) {
+        herds.push({})
+    }
+
+    return result.length
+} */
+
+const removeCowBtn = function(id) {
+    const cattleIndex = cattle.findIndex(function(cow) {
+        return cow.cowId === id
     })
-    console.log(foundCattle)
+
+    if(cattleIndex > -1) {
+        cattle.splice(cattleIndex, 1)
+    }
+
+    saveCattle(cattle)
+    location.reload()
+}
+
+//Displays the cattle ONLY 
+const displayCattle = function(foundCattle) {
+
+    const herdId = location.hash.substring(1)
+
     const headers = ['Tag #', 'Cow Name']
 
     const displayCows = document.querySelector('#display-cattle')
@@ -53,23 +62,37 @@ const displayCattle = function(cows) {
     
     table.appendChild(headerRow)
     
-    foundCattle.forEach(function(cattle) {
+    foundCattle.forEach(function(cow) {
 
         const row = document.createElement('tr')
         const cell = document.createElement('td')
         const cell2 = document.createElement('td')
+
+        const removeBtn = document.createElement('button')
+        removeBtn.textContent = 'Remove'
+        removeBtn.className = 'btn btn-danger'
+        removeBtn.style.marginLeft = '10px'
+
+        removeBtn.addEventListener('click', function() {
+            removeCowBtn(cow.cowId)
+        })
         
         let textNode1
         let textNode2
 
-        textNode1 = document.createTextNode(cattle.found)
-        textNode2 = document.createTextNode(cattle.found2)
+        if(cow.herdId === herdId) {
+            textNode1 = document.createTextNode(cow.cow)
+            textNode2 = document.createTextNode(cow.tag) 
+
+            cell.appendChild(textNode1)
+            cell.appendChild(removeBtn)
+            cell2.appendChild(textNode2)
+
+            row.appendChild(cell2)
+            row.appendChild(cell)
+        } 
         
-        cell.appendChild(textNode1)
-        cell2.appendChild(textNode2)
         
-        row.appendChild(cell2)
-        row.appendChild(cell)
 
         tbody.appendChild(row)
         table.appendChild(tbody)

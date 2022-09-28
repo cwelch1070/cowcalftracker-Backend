@@ -60,10 +60,6 @@ const getCurrentDate = function() {
     return current_date
 }
 
-const editHerd = function() {
-
-}
-
 /*
     This function:
         - Creates an html p tag
