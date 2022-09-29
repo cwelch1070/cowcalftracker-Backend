@@ -19,11 +19,11 @@ nameHerd.addEventListener('input', function(e) {
     saveHerds(herds)
 })
 
-//Captures number from input
+/* //Captures number from input
 herdCount.addEventListener('input', function(e) {
     herd.count = e.target.value
     saveHerds(herds)
-})  
+})   */
 
 //Simple button linking back to index page
 addHerdBtn.addEventListener('click', function(e) {

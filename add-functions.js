@@ -1,3 +1,9 @@
+/*
+    ISSUES: 
+        When a herd is removed the cattle associated with that herd also need to be removed.
+        Currently, they are not.
+*/
+
 //Saves the array to localstorage
 const saveCattle = function(cattle) {
     localStorage.setItem('cattle', JSON.stringify(cattle))
@@ -14,18 +20,30 @@ const getCattle = function() {
      }
 }
 
-/* const herdCount = function(cattle) {
-    const herdId = location.hash.substring(1)
+/*
+    The cattle array and the herdId's are passed to the function.
+    From there the filter method is called and find all the cattle that are associated to 
+    to a herdId and stores them in a new array that is then used to 
+    display the number of cattle in each herd on the Available herds page(index.html).
 
+    If result is printed to the console you can see that three new arrays are created
+    each containing the herdId, cowId, and the cows name and tag number.
+
+    How it works: 
+        The call to herdCount is in a loop and as that loop progresses over the objects in the herds array
+        it sends the id of that herd to the herdCount function. The herdCount function then checks if there 
+        are any cattle associated with that herdId in the cattle array. If there is it returns the length of
+        the new array created from the filter method and displays that as the number of cattle in the herd.
+*/
+const herdCount = function(cattle, herdId) {
+    
     const result = cattle.filter(cattle => cattle.herdId === herdId)
-
-    if(herds.herdId === herdId) {
-        herds.push({})
-    }
+    console.log(result)
 
     return result.length
-} */
+} 
 
+//Removes a cow from the array, saves the new array, and reloads the page when the btn is clicked
 const removeCowBtn = function(id) {
     const cattleIndex = cattle.findIndex(function(cow) {
         return cow.cowId === id
@@ -39,7 +57,7 @@ const removeCowBtn = function(id) {
     location.reload()
 }
 
-//Displays the cattle ONLY 
+//Displays the cattle ONLY to the DOM
 const displayCattle = function(foundCattle) {
 
     const herdId = location.hash.substring(1)
@@ -67,11 +85,11 @@ const displayCattle = function(foundCattle) {
         const row = document.createElement('tr')
         const cell = document.createElement('td')
         const cell2 = document.createElement('td')
+        const cell3 = document.createElement('td')
 
         const removeBtn = document.createElement('button')
         removeBtn.textContent = 'Remove'
         removeBtn.className = 'btn btn-danger'
-        removeBtn.style.marginLeft = '10px'
 
         removeBtn.addEventListener('click', function() {
             removeCowBtn(cow.cowId)
@@ -85,14 +103,13 @@ const displayCattle = function(foundCattle) {
             textNode2 = document.createTextNode(cow.tag) 
 
             cell.appendChild(textNode1)
-            cell.appendChild(removeBtn)
             cell2.appendChild(textNode2)
+            cell3.appendChild(removeBtn)
 
             row.appendChild(cell2)
             row.appendChild(cell)
+            row.appendChild(cell3)
         } 
-        
-        
 
         tbody.appendChild(row)
         table.appendChild(tbody)

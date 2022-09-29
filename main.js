@@ -1,4 +1,5 @@
 const herds = getHerds()
+const cattle = getCattle()
 
 const newHerd = document.querySelector('#create-herd')
 
@@ -10,7 +11,7 @@ newHerd.addEventListener('click', function(e) {
     herds.push({
         id: id,
         herdName: '',
-        count: 0,
+        //count: 0,
         date: getCurrentDate()
     })
   

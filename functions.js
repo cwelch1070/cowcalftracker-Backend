@@ -135,11 +135,11 @@ const generateDOM = function(herd) {
         if(herds.herdName.length > 0) {
             //Creates textNode to display indvidual data if condition is met
             textNode1 = document.createTextNode(herds.herdName)
-            textNode2 = document.createTextNode(herds.count)
+            textNode2 = document.createTextNode(herdCount(cattle, herds.id))
             textNode3 = document.createTextNode(herds.date)    
         } else {
             textNode1 = document.createTextNode('Unnamed')
-            textNode2 = document.createTextNode(herds.count)
+            textNode2 = document.createTextNode(herdCount(cattle, herds.id))
             textNode3 = document.createTextNode(herds.date)
         }
 
