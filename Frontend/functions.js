@@ -1,10 +1,10 @@
 //Saves the array to localstorage
-const saveHerds = function(herds) {
+const saveHerds = (herds) => {
     localStorage.setItem('herds', JSON.stringify(herds))
 }
 
 //Gets the array from localstorage and checks if it is empty and parses it
-const getHerds = function() {
+const getHerds = () => {
     const herdsJSON = localStorage.getItem('herds')
 
     if(herdsJSON !== null) {
@@ -31,7 +31,7 @@ const getHerds = function() {
 */
 
 //Funtion to add functionality to remove individual herd button
-const removeHerdBtn = function(id) {
+const removeHerdBtn = (id) => {
     
     /* 
         //This script will delete all herds which is not the desired output 
@@ -40,9 +40,7 @@ const removeHerdBtn = function(id) {
         //bellow script must be used
     */
 
-    const herdIndex = herds.findIndex(function(herd) {
-        return herd.id === id
-    })
+    const herdIndex = herds.findIndex((herd) => herd.id === id)
 
     if(herdIndex > -1) {
         herds.splice(herdIndex, 1)
@@ -55,7 +53,7 @@ const removeHerdBtn = function(id) {
 /*
     Get date to time stamp when herd is created
 */
-const getCurrentDate = function() {
+const getCurrentDate = () => {
     const date = new Date();
 	const current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
 
@@ -70,7 +68,7 @@ const getCurrentDate = function() {
             - If not it sets the p tags value to unnamed herd
         - Then it returns textEl which contains the value of the p tag that was created
 */
-const generateDOM = function(herd) {
+const generateDOM = (herd) => {
     //Array to hold names of headers
     const headers = ['Herd Name', 'Number of Cattle', 'Last Edited']
 
@@ -83,7 +81,7 @@ const generateDOM = function(herd) {
     let headerRow = document.createElement('tr')
 
     //Loops once for every header name each time adding the header names to the row
-    headers.forEach(function(headerText) {
+    headers.forEach((headerText) => {
         //Creates table header element
         let header = document.createElement('th')
         //Creates text node to display header names
@@ -99,7 +97,7 @@ const generateDOM = function(herd) {
     table.appendChild(headerRow)
 
     //Loops through the herds array objects
-    herd.forEach(function(herds) {
+    herd.forEach((herds) => {
         //Creates HTML table row and table data elements to display herds data
         const row = document.createElement('tr')
         const cell = document.createElement('td')
@@ -115,21 +113,21 @@ const generateDOM = function(herd) {
         //Remove button to remove individual elements
         const removeBtn = document.createElement('button')
         removeBtn.textContent = 'Remove'
-        removeBtn.addEventListener('click', function() {
+        removeBtn.addEventListener('click', () => {
             removeHerdBtn(herds.id)
         })
 
         //Edit herd name and count
         const editButton = document.createElement('button')
         editButton.textContent = 'Edit Herd'
-        editButton.addEventListener('click', function() {
+        editButton.addEventListener('click', () => {
             location.assign(`./createHerd.html#${herds.id}`)
         })
 
         //Link to add cattle page
         const addCattle = document.createElement('button')
         addCattle.textContent = 'Add Cattle'
-        addCattle.addEventListener('click', function() {
+        addCattle.addEventListener('click', () => {
             location.assign(`./addCattle.html#${herds.id}`)
         })
 

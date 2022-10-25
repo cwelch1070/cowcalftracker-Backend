@@ -26,17 +26,17 @@ let numOfTag = 0
 displayCattle(cattle)
 
 //Captures the users input for the cows name
-nameCow.addEventListener('input', function(e) {
+nameCow.addEventListener('input', (e) =>{
     nameOfCow = e.target.value
 })
 
 //Captures the users input for the cows tag number
-tagNum.addEventListener('input', function(e) {
+tagNum.addEventListener('input', (e) =>{
     numOfTag = e.target.value
 })
 
 //Creates an object for the herd when the add cow button is clicked
-newCow.addEventListener('click', function(e) {
+newCow.addEventListener('click', (e) =>{
     e.preventDefault()
     const id = uuidv4()
     cattle.push({
@@ -52,11 +52,11 @@ newCow.addEventListener('click', function(e) {
 })  
 
 //Return user to herds page
-back.addEventListener('click', function(e) {
+back.addEventListener('click', (e) =>{
     location.assign('./index.html')
 })
 
 //Goes to cattle checker page and includes herdId in url
-cattleChecker.addEventListener('click', function(e) {
+cattleChecker.addEventListener('click', (e) =>{
     location.assign(`./check-cattle.html#${herdId}`)
 })

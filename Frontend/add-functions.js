@@ -5,12 +5,12 @@
 */
 
 //Saves the array to localstorage
-const saveCattle = function(cattle) {
+const saveCattle = (cattle) =>{
     localStorage.setItem('cattle', JSON.stringify(cattle))
 }
 
 //Gets the array from localstorage and checks if it is empty and parses it
-const getCattle = function() {
+const getCattle = () => {
     const cattleJSON = localStorage.getItem('cattle')
 
     if(cattleJSON !== null) {
@@ -35,7 +35,7 @@ const getCattle = function() {
         are any cattle associated with that herdId in the cattle array. If there is it returns the length of
         the new array created from the filter method and displays that as the number of cattle in the herd.
 */
-const herdCount = function(cattle, herdId) {
+const herdCount = (cattle, herdId) => {
     
     const result = cattle.filter(cattle => cattle.herdId === herdId)
     console.log(result)
@@ -44,10 +44,8 @@ const herdCount = function(cattle, herdId) {
 } 
 
 //Removes a cow from the array, saves the new array, and reloads the page when the btn is clicked
-const removeCowBtn = function(id) {
-    const cattleIndex = cattle.findIndex(function(cow) {
-        return cow.cowId === id
-    })
+const removeCowBtn = (id) => {
+    const cattleIndex = cattle.findIndex((cow) => cow.cowId === id)
 
     if(cattleIndex > -1) {
         cattle.splice(cattleIndex, 1)
@@ -58,7 +56,7 @@ const removeCowBtn = function(id) {
 }
 
 //Displays the cattle ONLY to the DOM
-const displayCattle = function(foundCattle) {
+const displayCattle = (foundCattle) => {
 
     const herdId = location.hash.substring(1)
 
@@ -70,7 +68,7 @@ const displayCattle = function(foundCattle) {
     let tbody = document.createElement('tbody')
     let headerRow = document.createElement('tr')
 
-    headers.forEach(function(headerText2) {
+    headers.forEach((headerText2) => {
         let header = document.createElement('th')
         let text = document.createTextNode(headerText2)
 
@@ -80,7 +78,7 @@ const displayCattle = function(foundCattle) {
     
     table.appendChild(headerRow)
     
-    foundCattle.forEach(function(cow) {
+    foundCattle.forEach((cow) => {
 
         const row = document.createElement('tr')
         const cell = document.createElement('td')

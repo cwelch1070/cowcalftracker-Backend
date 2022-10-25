@@ -10,7 +10,7 @@ let herd = herds.find(function(herd) {
 }) 
 
 //Displays the cattle ONLY to the DOM
-const displayCheckCattle = function(foundCattle) {
+const displayCheckCattle = (foundCattle) => {
 
     const herdId = location.hash.substring(1)
 
@@ -22,7 +22,7 @@ const displayCheckCattle = function(foundCattle) {
     let tbody = document.createElement('tbody')
     let headerRow = document.createElement('tr')
 
-    headers.forEach(function(headerText2) {
+    headers.forEach((headerText2) => {
         let header = document.createElement('th')
         let text = document.createTextNode(headerText2)
 
@@ -32,7 +32,7 @@ const displayCheckCattle = function(foundCattle) {
     
     table.appendChild(headerRow)
     
-    foundCattle.forEach(function(cow) {
+    foundCattle.forEach((cow) => {
 
         const row = document.createElement('tr')
         const cell = document.createElement('td')
@@ -42,13 +42,15 @@ const displayCheckCattle = function(foundCattle) {
         const checkBox = document.createElement('input')
         checkBox.className = 'form-check-input mt-0'
         checkBox.type = 'checkbox'
+        checkBox.style.width = '25px'
+        checkBox.style.height = '25px'
         checkBox.style.marginRight = '10px'
 
         const removeBtn = document.createElement('button')
         removeBtn.textContent = 'Remove'
         removeBtn.className = 'btn btn-danger'
 
-        removeBtn.addEventListener('click', function() {
+        removeBtn.addEventListener('click', () => {
             removeCowBtn(cow.cowId)
         })
         
@@ -62,7 +64,7 @@ const displayCheckCattle = function(foundCattle) {
             cell.appendChild(textNode1)
             cell2.appendChild(checkBox)
             cell2.appendChild(textNode2)
-            cell3.appendChild(removeBtn)
+            //cell3.appendChild(removeBtn)
 
             row.appendChild(cell2)
             row.appendChild(cell)
