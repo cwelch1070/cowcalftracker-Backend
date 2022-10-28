@@ -3,4 +3,3 @@ const cattle = getCattle()
 
 generateDOM(herds)
 nameHerd(herds)
-displayCattle(cattle)

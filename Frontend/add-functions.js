@@ -37,9 +37,7 @@ const getCattle = () => {
         the new array created from the filter method and displays that as the number of cattle in the herd.
 */
 const cattleCount = (cattle, herdId) => {
-    
     const result = cattle.filter(cattle => cattle.herdId === herdId)
-    console.log(result)
 
     return result.length
 } 
@@ -57,7 +55,6 @@ const removeCowBtn = (id) => {
 }
 
 const addCattle = (idHerd) => {
-    console.log(idHerd)
     //Defines variables and where they are targeted
     const nameCow = document.querySelector('#cow-name')
     const tagNum = document.querySelector('#tag-num')
@@ -99,12 +96,7 @@ const addCattle = (idHerd) => {
 }
 
 //Displays the cattle ONLY to the DOM
-const displayCattle = (cows) => {
-    let herdId
-    herds.forEach((herd) => {
-        herdId = herd.id
-    })
-
+const displayCattle = (cows, herdsId) => {
     const headers = ['Tag #', 'Cow Name']
 
     const displayCows = document.querySelector('#display-cattle')
@@ -141,8 +133,7 @@ const displayCattle = (cows) => {
         let textNode1
         let textNode2
 
-        //Stopped here need to change how comparison works
-        if(cow.herdId === herdId) {
+        if(herdsId === cow.herdId) {
             textNode1 = document.createTextNode(cow.cow)
             textNode2 = document.createTextNode(cow.tag) 
 
@@ -153,7 +144,9 @@ const displayCattle = (cows) => {
             row.appendChild(cell2)
             row.appendChild(cell)
             row.appendChild(cell3)
-        } 
+        } else {
+            console.log('Comparison Failed')
+        }
 
         tbody.appendChild(row)
         table.appendChild(tbody)

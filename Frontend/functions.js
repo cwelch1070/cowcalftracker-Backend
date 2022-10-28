@@ -108,11 +108,28 @@ const generateDOM = (herd) => {
         const p2 = document.createElement('p')
 
         const viewEditCattle = document.createElement('button')
-        viewEditCattle.textContent = 'View/Edit Cattle'
-        
+        viewEditCattle.textContent = 'Add Cattle'
         //click was not spelled correctly retry earlier test may work with click set correctly.
         viewEditCattle.addEventListener('click', (e) => {
             addCattle(herds.id)
+        })
+
+
+        const toggleButton = document.createElement('button')
+        toggleButton.textContent = 'View Cattle'
+        let num = 0
+        toggleButton.addEventListener('click', (e) => {
+            num++
+
+            let findCow = cattle.find(e => e.herdId === herds.id)
+            if(num < 2) {
+                if(herds.id === findCow.herdId) {
+                    displayCattle(cattle, herds.id)
+                }
+            } else {
+                location.reload()
+            }
+            
         })
        
         const deleteHerd = document.createElement('button')
@@ -148,6 +165,9 @@ const generateDOM = (herd) => {
         cardBody.appendChild(p1)
         cardBody.appendChild(p2)
         cardBody.appendChild(viewEditCattle)
+        cardBody.appendChild(toggleButton)
+        /* cardBody.appendChild(input)
+        cardBody.appendChild(label) */
         cardBody.appendChild(deleteHerd)
 
         card.appendChild(cardBody)
@@ -163,13 +183,25 @@ const generateDOM = (herd) => {
         cardBody.className = 'card-body'
 
         //Bootstrap needed to generate modal when button is clicked
-        viewEditCattle.className = 'btn btn-primary'
+        viewEditCattle.className = 'btn btn-success'
         viewEditCattle.type = 'button'
         viewEditCattle.dataset.bsToggle = 'modal'
         viewEditCattle.dataset.bsTarget = '#staticBackdrop2' 
 
+        toggleButton.className = 'btn btn-primary ms-1'
+        toggleButton.dataset.bsToggle = 'button'
+        toggleButton.type = 'button'
+
+        /* input.type = 'checkbox'
+        input.className = 'btn-check'
+        input.id = 'btn-check-outlined'
+        input.autocomplete = 'off'
+
+        label.className = 'btn btn-outline-primary ms-1'
+        label.htmlFor = 'btn-check-outlined'
+ */
         deleteHerd.className = 'btn btn-danger ms-1'
-        heading.className = 'card-title'
+        heading.className = 'card-title '
         p1.className = 'card-text'
         p2.className = 'card-text'
 
