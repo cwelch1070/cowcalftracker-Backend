@@ -5,7 +5,7 @@
 */
 
 //Saves the array to localstorage
-const saveCattle = (cattle) =>{
+const saveCattle = (cattle) => {
     localStorage.setItem('cattle', JSON.stringify(cattle))
 }
 
@@ -13,11 +13,12 @@ const saveCattle = (cattle) =>{
 const getCattle = () => {
     const cattleJSON = localStorage.getItem('cattle')
 
-    if(cattleJSON !== null) {
-         return JSON.parse(cattleJSON)
-     } else {
-         return []
-     }
+    try {
+        return cattleJSON !== null ? JSON.parse(cattleJSON) : []
+    } catch(e) {
+        return []
+    }
+    
 }
 
 /*
@@ -30,12 +31,12 @@ const getCattle = () => {
     each containing the herdId, cowId, and the cows name and tag number.
 
     How it works: 
-        The call to herdCount is in a loop and as that loop progresses over the objects in the herds array
-        it sends the id of that herd to the herdCount function. The herdCount function then checks if there 
+        The call to cattleCount is in a loop and as that loop progresses over the objects in the herds array
+        it sends the id of that herd to the cattleCount function. The cattleCount function then checks if there 
         are any cattle associated with that herdId in the cattle array. If there is it returns the length of
         the new array created from the filter method and displays that as the number of cattle in the herd.
 */
-const herdCount = (cattle, herdId) => {
+const cattleCount = (cattle, herdId) => {
     
     const result = cattle.filter(cattle => cattle.herdId === herdId)
     console.log(result)
@@ -55,10 +56,54 @@ const removeCowBtn = (id) => {
     location.reload()
 }
 
-//Displays the cattle ONLY to the DOM
-const displayCattle = (foundCattle) => {
+const addCattle = (idHerd) => {
+    console.log(idHerd)
+    //Defines variables and where they are targeted
+    const nameCow = document.querySelector('#cow-name')
+    const tagNum = document.querySelector('#tag-num')
+    const newCow = document.querySelector('#add-cow')
+    //const cattleChecker = document.querySelector('#cattle-checker')
 
-    const herdId = location.hash.substring(1)
+    //Default values
+    let nameOfCow = 'Cow'
+    let numOfTag = 0
+
+    //Renders the UI
+    //displayCattle(cattle)
+
+    //Captures the users input for the cows name
+    nameCow.addEventListener('input', (e) =>{
+        nameOfCow = e.target.value
+    })
+
+    //Captures the users input for the cows tag number
+    tagNum.addEventListener('input', (e) =>{
+        numOfTag = e.target.value
+    })
+
+    //Creates an object for the herd when the add cow button is clicked
+    newCow.addEventListener('click', (e) =>{
+        e.preventDefault()
+        const id = uuidv4()
+        cattle.push({
+            herdId: idHerd,
+            cowId: id,
+            cow: nameOfCow,
+            tag: numOfTag
+        })
+
+        //displayCattle(cattle)
+        saveCattle(cattle)
+        location.reload()
+    })  
+}
+
+//Displays the cattle ONLY to the DOM
+const displayCattle = (cows) => {
+    let herdId
+    herds.forEach((herd) => {
+        herdId = herd.id
+    })
 
     const headers = ['Tag #', 'Cow Name']
 
@@ -78,7 +123,7 @@ const displayCattle = (foundCattle) => {
     
     table.appendChild(headerRow)
     
-    foundCattle.forEach((cow) => {
+    cows.forEach((cow) => {
 
         const row = document.createElement('tr')
         const cell = document.createElement('td')
@@ -96,6 +141,7 @@ const displayCattle = (foundCattle) => {
         let textNode1
         let textNode2
 
+        //Stopped here need to change how comparison works
         if(cow.herdId === herdId) {
             textNode1 = document.createTextNode(cow.cow)
             textNode2 = document.createTextNode(cow.tag) 
