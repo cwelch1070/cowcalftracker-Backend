@@ -82,6 +82,7 @@ const nameHerd = (herd) => {
         })
 
         saveHerds(herds)
+        location.reload()
     })
 }
 
@@ -96,6 +97,9 @@ const nameHerd = (herd) => {
 const generateDOM = (herd) => {
     //Selects the main HTML div and creates a div for row
     const mainDiv = document.querySelector('#main')
+    const confirmDeleteBtn = document.querySelector('#confirm-delete')
+    const closeViewCattleModal = document.querySelector('#close-view-cattle')
+
     const row = document.createElement('div')
     
     herd.forEach((herds) => {
@@ -103,40 +107,42 @@ const generateDOM = (herd) => {
         const col = document.createElement('div')
         const card = document.createElement('div')
         const cardBody = document.createElement('div')
+        const btnGroup = document.createElement('div')
         const heading = document.createElement('h5')
         const p1 = document.createElement('p')
         const p2 = document.createElement('p')
 
-        const viewEditCattle = document.createElement('button')
-        viewEditCattle.textContent = 'Add Cattle'
+        const addCattlebtn = document.createElement('button')
+        addCattlebtn.textContent = 'Add Cattle'
         //click was not spelled correctly retry earlier test may work with click set correctly.
-        viewEditCattle.addEventListener('click', (e) => {
+        addCattlebtn.addEventListener('click', (e) => {
             addCattle(herds.id)
         })
 
 
         const toggleButton = document.createElement('button')
         toggleButton.textContent = 'View Cattle'
-        let num = 0
         toggleButton.addEventListener('click', (e) => {
-            num++
-
             let findCow = cattle.find(e => e.herdId === herds.id)
-            if(num < 2) {
-                if(herds.id === findCow.herdId) {
-                    displayCattle(cattle, herds.id)
-                }
-            } else {
-                location.reload()
-            }
-            
+            if(herds.id === findCow.herdId) {
+                displayCattle(cattle, herds.id)
+            }  
+        })
+
+        closeViewCattleModal.addEventListener('click', (e) => {
+            location.reload()
         })
        
         const deleteHerd = document.createElement('button')
         deleteHerd.textContent = 'Delete'
-        deleteHerd.addEventListener('click', () => {
-            removeHerdBtn(herds.id)
+        deleteHerd.addEventListener('click', (e) => {
+            let id = herds.id
+            confirmDeleteBtn.addEventListener('click', (e) => {
+                removeHerdBtn(id)
+            })
         })
+        
+        
 
         //Define textNodes to hold herd data
         let textNode1
@@ -164,11 +170,10 @@ const generateDOM = (herd) => {
         cardBody.appendChild(heading)
         cardBody.appendChild(p1)
         cardBody.appendChild(p2)
-        cardBody.appendChild(viewEditCattle)
-        cardBody.appendChild(toggleButton)
-        /* cardBody.appendChild(input)
-        cardBody.appendChild(label) */
-        cardBody.appendChild(deleteHerd)
+        cardBody.appendChild(btnGroup)
+        btnGroup.appendChild(addCattlebtn)
+        btnGroup.appendChild(toggleButton)
+        btnGroup.appendChild(deleteHerd)
 
         card.appendChild(cardBody)
 
@@ -182,25 +187,25 @@ const generateDOM = (herd) => {
         card.className = 'card border-success mt-1'
         cardBody.className = 'card-body'
 
+        //Button group bootstrap
+        btnGroup.className = 'btn-group'
+
         //Bootstrap needed to generate modal when button is clicked
-        viewEditCattle.className = 'btn btn-success'
-        viewEditCattle.type = 'button'
-        viewEditCattle.dataset.bsToggle = 'modal'
-        viewEditCattle.dataset.bsTarget = '#staticBackdrop2' 
+        addCattlebtn.className = 'btn btn-success'
+        addCattlebtn.type = 'button'
+        addCattlebtn.dataset.bsToggle = 'modal'
+        addCattlebtn.dataset.bsTarget = '#staticBackdrop2' 
 
-        toggleButton.className = 'btn btn-primary ms-1'
-        toggleButton.dataset.bsToggle = 'button'
+        toggleButton.className = 'btn btn-primary'
         toggleButton.type = 'button'
+        toggleButton.dataset.bsToggle = 'modal'
+        toggleButton.dataset.bsTarget = '#staticBackdrop3'
 
-        /* input.type = 'checkbox'
-        input.className = 'btn-check'
-        input.id = 'btn-check-outlined'
-        input.autocomplete = 'off'
+        deleteHerd.className = 'btn btn-danger'
+        deleteHerd.type = 'button'
+        deleteHerd.dataset.bsToggle = 'modal'
+        deleteHerd.dataset.bsTarget = '#staticBackdrop4'
 
-        label.className = 'btn btn-outline-primary ms-1'
-        label.htmlFor = 'btn-check-outlined'
- */
-        deleteHerd.className = 'btn btn-danger ms-1'
         heading.className = 'card-title '
         p1.className = 'card-text'
         p2.className = 'card-text'

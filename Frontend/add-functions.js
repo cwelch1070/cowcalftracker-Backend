@@ -144,9 +144,18 @@ const displayCattle = (cows, herdsId) => {
             row.appendChild(cell2)
             row.appendChild(cell)
             row.appendChild(cell3)
-        } else {
-            console.log('Comparison Failed')
         }
+
+        /* if(num === 2) {
+            cell.removeChild(textNode1)
+            cell2.removeChild(textNode2)
+            cell3.removeChild(removeBtn)
+
+            row.removeChild(cell2)
+            row.removeChild(cell)
+            row.removeChild(cell3)
+            console.log('Removed')
+        } */
 
         tbody.appendChild(row)
         table.appendChild(tbody)
