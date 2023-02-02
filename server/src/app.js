@@ -1,25 +1,22 @@
 require('./db/mongoose')
 const User = require('./models/users')
 const express = require('express')
-const path = require('path')
+const cors = require('cors')
+const userRouter = require('./routes/user')
 
 const app = express()
 const port = process.env.PORT || 3001
 
-//app.use(express.static(path.join(__dirname, '../frontend')))
-//The .json() seems to send the data in JSON format to make it readable. Without it the res and req does not work
+//Cross Origin Resource Sharing: Allows frontend and backend to communicate
+app.use(cors())
+
+//Allows for json
 app.use(express.json())
 
-app.post('/user', (req, res) => {
-    const user = new User(req.body)
+//Routes
+app.use(userRouter)
 
-    user.save().then(() => {
-        res.status(201).send(user)
-    }).catch((e) => {
-        res.status(400).send(e)
-    })
-})
-
+//Start express 
 app.listen(port, () => {
     console.log('App is running on port ' + port)
 })
