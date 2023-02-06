@@ -45,6 +45,13 @@ const getHerdData = async () => {
     })
 
     const data = await response.json()
+    console.log(data)
+
+    data.forEach((id) => {
+        setHerdId(id._id)
+    })
+    
+    console.log(getHerdId())
 
     return data
 }
