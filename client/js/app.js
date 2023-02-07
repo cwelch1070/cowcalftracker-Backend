@@ -1,2 +1,4 @@
 generateDOM()
 nameHerd()
+displayCattle()
+addCattle()

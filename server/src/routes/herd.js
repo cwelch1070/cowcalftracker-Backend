@@ -19,7 +19,7 @@ router.post('/herd', auth, async (req, res) => {
 
 router.get('/herd', auth, async (req, res) => {
     try {
-        const herd = await Herd.find({ creator: req.user._id })
+        const herd = await Herd.find({ creator: req.user._id }) 
         res.status(200).send(herd)
     } catch (e) {
         res.status(400).send(e)
