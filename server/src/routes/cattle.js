@@ -5,8 +5,8 @@ const router = new express.Router()
 router.post('/cattle', async (req, res) => {
     const cattle = new Cattle({
         ...req.body,
-        herd: req.herd._id
-    })
+        herd: req.body.herdId
+    }) 
     
     try {
         await cattle.save()
@@ -17,8 +17,13 @@ router.post('/cattle', async (req, res) => {
     }
 })
 
-router.get('/cattle', async (req, res) => {
-
+router.get('/cattle/:id', async (req, res) => {
+    try {
+        const cattle = await Cattle.find({herd: req.params.id})
+        res.status(200).send(cattle)
+    } catch (e) {
+        
+    }
 })
 
 module.exports = router

@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
         }
     },
     tokens: [{
-        token: {
+        token: { 
             type: String,
             required: true
         }

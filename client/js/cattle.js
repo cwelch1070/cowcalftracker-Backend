@@ -1,4 +1,4 @@
-const addCattle = () => { 
+const addCattle = (herdId) => { 
     //Defines variables and where they are targeted
     const nameCow = document.querySelector('#cow-name')
     const tagNum = document.querySelector('#tag-num')
@@ -6,14 +6,14 @@ const addCattle = () => {
     //const cattleChecker = document.querySelector('#cattle-checker')
 
     const cattleData = {
-        name: '',
+        name: 'Cow',
         tag: 0
     }
 
     //Captures the users input for the cows name
     nameCow.addEventListener('input', (e) =>{
         cattleData.name = e.target.value
-    })
+    }) 
 
     //Captures the users input for the cows tag number
     tagNum.addEventListener('input', (e) =>{
@@ -29,7 +29,8 @@ const addCattle = () => {
             mode: 'cors',
             body: JSON.stringify({
                 name: cattleData.name,
-                tag: cattleData.tag
+                tag: cattleData.tag,
+                herdId: herdId
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -39,12 +40,12 @@ const addCattle = () => {
         const data = await response.json()
         console.log(data)
         
-        //location.reload()
+        location.reload()
     })  
 }
 
-const getCattle = async () => {
-    const response = await fetch('http://localhost:3001/cattle', {
+const getCattle = async (herdId) => {
+    const response = await fetch('http://localhost:3001/cattle/' + herdId, {
         method: 'GET',
         mode: 'cors',
         headers: {
@@ -60,7 +61,7 @@ const getCattle = async () => {
 }
 
 //Displays the cattle ONLY to the DOM
-const displayCattle = async () => {
+const displayCattle = async (herdId) => {
     const headers = ['Tag #', 'Cow Name']
 
     const displayCows = document.querySelector('#display-cattle')
@@ -79,10 +80,11 @@ const displayCattle = async () => {
     
     table.appendChild(headerRow)
     
-    const cattleData = await getCattle()
+    const cattleData = await getCattle(herdId)
+    console.log(cattleData)
 
     cattleData.forEach((cattle) => {
-
+        //document.querySelector('#display-cattle').innerHTML = ''
         const row = document.createElement('tr')
         const cell = document.createElement('td')
         const cell2 = document.createElement('td')

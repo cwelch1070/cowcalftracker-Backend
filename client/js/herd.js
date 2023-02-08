@@ -45,13 +45,6 @@ const getHerdData = async () => {
     })
 
     const data = await response.json()
-    console.log(data)
-
-    data.forEach((id) => {
-        setHerdId(id._id)
-    })
-    
-    console.log(getHerdId())
 
     return data
 }
@@ -82,14 +75,14 @@ const generateDOM = async () => {
 
         const addCattlebtn = document.createElement('button')
         addCattlebtn.textContent = 'Add Cattle'
-        addCattlebtn.addEventListener('click', (e) => {
-
+        addCattlebtn.addEventListener('click', async (e) => {
+            addCattle(herd._id)
         })
 
         const toggleButton = document.createElement('button')
         toggleButton.textContent = 'View Cattle'
         toggleButton.addEventListener('click', (e) => {
-            
+            displayCattle(herd._id)
         })
 
         closeViewCattleModal.addEventListener('click', (e) => {
@@ -99,9 +92,18 @@ const generateDOM = async () => {
         const deleteHerd = document.createElement('button')
         deleteHerd.textContent = 'Delete'
         deleteHerd.addEventListener('click', (e) => {
-            
-            confirmDeleteBtn.addEventListener('click', (e) => {
-                
+            confirmDeleteBtn.addEventListener('click', async (e) => {
+                const response = await fetch('http://localhost:3001/herd/' + herd._id, {
+                    method: 'DELETE',
+                    mode: 'cors',
+                    headers: {
+                        'Authorization': getToken(),
+                        'Content-Type': 'application/json'
+                    }
+                })
+
+                const data = await response.json()
+                console.log(data)
             })
         })
         
