@@ -42,10 +42,11 @@ router.get('/herd', auth, async (req, res) => {
     }
 }) */
 
+//Deletes herd and all cattle associated with it
 router.delete('/herd/:id', auth, async (req, res) => {
     try {
         const herd = await Herd.findByIdAndDelete(req.params.id)
-        const cattle = await Cattle.findByIdAndDelete({herd: req.params.id})
+        const cattle = await Cattle.deleteMany({ herd: req.params.id})
 
         res.status(200).send({message: 'Successfully deleted herd and all associated cattle'})
     } catch (e) {

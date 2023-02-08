@@ -1,19 +1,5 @@
-//Allows access to cattle and herds array objects
-const cattle = getCattle()
-const herds = getHerds()
-
-//Gets the hash of the location and trims off the first position in which contains a #
-const herdId = location.hash.substring(1)
-//Checks if the herd.id in memory matches the hash
-let herd = herds.find(function(herd) {
-    return herd.id === herdId
-}) 
-
 //Displays the cattle ONLY to the DOM
 const displayCheckCattle = (foundCattle) => {
-
-    const herdId = location.hash.substring(1)
-
     const headers = ['Tag #', 'Cow Name']
 
     const displayCows = document.querySelector('#roll-call')
@@ -51,25 +37,24 @@ const displayCheckCattle = (foundCattle) => {
         removeBtn.className = 'btn btn-danger'
 
         removeBtn.addEventListener('click', () => {
-            removeCowBtn(cow.cowId)
+            removeCowBtn()
         })
         
         let textNode1
         let textNode2
 
-        if(cow.herdId === herdId) {
-            textNode1 = document.createTextNode(cow.cow)
-            textNode2 = document.createTextNode(cow.tag) 
+        textNode1 = document.createTextNode(cow.cow)
+        textNode2 = document.createTextNode(cow.tag) 
 
-            cell.appendChild(textNode1)
-            cell2.appendChild(checkBox)
-            cell2.appendChild(textNode2)
-            //cell3.appendChild(removeBtn)
+        cell.appendChild(textNode1)
+        cell2.appendChild(checkBox)
+        cell2.appendChild(textNode2)
+        //cell3.appendChild(removeBtn)
 
-            row.appendChild(cell2)
-            row.appendChild(cell)
-            row.appendChild(cell3)
-        } 
+        row.appendChild(cell2)
+        row.appendChild(cell)
+        row.appendChild(cell3)
+    
 
         tbody.appendChild(row)
         table.appendChild(tbody)

@@ -1,4 +1,4 @@
-//Contains the input and button needed to name a new herd
+//HANDLES NAMING OF HERD
 const nameHerd = () => {
 
     const herdData = {
@@ -14,7 +14,7 @@ const nameHerd = () => {
         herdData.name = e.target.value
     })
     
-    
+    //FETCH REQUEST TO SERVER TO CREATE HERD
     saveButton.addEventListener('click', async (e) => {
         const response = await fetch('http://localhost:3001/herd', {
             method: 'POST',
@@ -34,6 +34,7 @@ const nameHerd = () => {
     })
 }
 
+//FETCH THE HERD DATA FROM SERVER
 const getHerdData = async () => {
     const response = await fetch('http://localhost:3001/herd', {
         method: 'GET',
@@ -49,20 +50,22 @@ const getHerdData = async () => {
     return data
 }
 
+//GENERATES HTML ELEMENTS AND RENDERS HERD DATA IN THEM
 const generateDOM = async () => {
     //Selects the main HTML div and creates a div for row
     const mainDiv = document.querySelector('#main')
     const confirmDeleteBtn = document.querySelector('#confirm-delete')
-    const closeViewCattleModal = document.querySelector('#close-view-cattle')
 
     const row = document.createElement('div')
 
     //Store the return of getHerdData in herData
     const herdData = await getHerdData()
     
-    //This loops once for every item returned by getHerdData()
-    //and displays each herd in the DB as well as generating 
-    //all the needed html elements
+    /*  
+        This loops once for every item returned by getHerdData()
+        and displays each herd in the DB as well as generating 
+        all the needed html elements to display each piece of data
+    */
     herdData.forEach((herd) => {
         //HTML elements 
         const col = document.createElement('div')
@@ -73,22 +76,21 @@ const generateDOM = async () => {
         const p1 = document.createElement('p')
         const p2 = document.createElement('p')
 
+        //ADD CATTLE BUTTON HANDLER
         const addCattlebtn = document.createElement('button')
         addCattlebtn.textContent = 'Add Cattle'
         addCattlebtn.addEventListener('click', async (e) => {
             addCattle(herd._id)
         })
 
+        //VIEW CATTLE BUTTON HANDLER
         const toggleButton = document.createElement('button')
         toggleButton.textContent = 'View Cattle'
         toggleButton.addEventListener('click', (e) => {
             displayCattle(herd._id)
-        })
-
-        closeViewCattleModal.addEventListener('click', (e) => {
-            location.reload()
-        })
+        }, {once: true})
        
+        //DELTE HERD AND CATTLE
         const deleteHerd = document.createElement('button')
         deleteHerd.textContent = 'Delete'
         deleteHerd.addEventListener('click', (e) => {
