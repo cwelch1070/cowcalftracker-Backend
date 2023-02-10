@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const Cattle = require('../models/cattle')
 
 const herdSchema = new mongoose.Schema({
     name: {
