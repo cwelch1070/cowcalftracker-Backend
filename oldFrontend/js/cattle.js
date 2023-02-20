@@ -83,8 +83,9 @@ const displayCattle = async (herdId) => {
     const cattleData = await getCattle(herdId)
     console.log(cattleData)
 
+    
+
     cattleData.forEach((cattle) => {
-        //document.querySelector('#display-cattle').innerHTML = ''
         const row = document.createElement('tr')
         const cell = document.createElement('td')
         const cell2 = document.createElement('td')

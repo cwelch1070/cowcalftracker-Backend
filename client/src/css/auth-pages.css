@@ -1,0 +1,14 @@
+.formPosition {
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 15%;
+    width: 25%;
+}
+
+.login h1 {
+    text-align: center;
+}
+
+.login p {
+    text-align: center;
+}
