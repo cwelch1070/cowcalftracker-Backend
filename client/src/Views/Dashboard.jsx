@@ -5,20 +5,21 @@ const Dashboard = () => {
 
     return (
         <div>
-            <div className='container-fluid'>
-                <div className='nav-bar'>
-                    <div className='logo'>
-                        <p>CowCalfTracker</p>
-                    </div>
-                    <div className='search-bar'>
-                        <input placeholder='Search'/>
-                    </div>
+            <div className='nav-bar-container'>
+                <div className='logo'>
+                    <p>CowCalfTracker</p>
+                </div>
+                <div className='search-bar'>
+                    <input placeholder='Search'/>
                 </div>
             </div>
             
             <div className='container'>
-                <div className='container mt-5'>
-                    <div className='defaultCard'>
+                <div className='cards'>
+                    <div className='defaultCard card-margin'>
+                        + New Herd
+                    </div>
+                    <div className='herdCard card-margin'>
                         <button className='optionsBtn'>. . .</button>
                         <h4>North Pasture</h4>
                         <p>10</p>
