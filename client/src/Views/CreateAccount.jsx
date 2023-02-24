@@ -5,7 +5,7 @@ const CreateAccount = () => {
 
 
     return ( 
-        <div className='container'>
+        <div className='container login'>
             <div className='formPosition'>
                 <h1>CowCalfTracker</h1>
                 <form>

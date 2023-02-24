@@ -5,19 +5,29 @@ const Dashboard = () => {
 
     return (
         <div>
-            <div className='nav-bar'>
-                <div className='logo'>
-                    CowCalfTracker
+            <div className='container-fluid'>
+                <div className='nav-bar'>
+                    <div className='logo'>
+                        <p>CowCalfTracker</p>
+                    </div>
+                    <div className='search-bar'>
+                        <input placeholder='Search'/>
+                    </div>
                 </div>
-                <div className='search-bar'>
-                    <input type="text" placeholder='Search'/>
-                    <button>Search</button>
+            </div>
+            
+            <div className='container'>
+                <div className='container mt-5'>
+                    <div className='defaultCard'>
+                        <button className='optionsBtn'>. . .</button>
+                        <h4>North Pasture</h4>
+                        <p>10</p>
+                    </div>
                 </div>
             </div>
         </div>
     )
 }
-
 export default Dashboard
 
 /* 
