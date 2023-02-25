@@ -12,6 +12,7 @@
 .logo p {
     transform: translateY(25%);
     font-size: 18px;
+    color: white;
 }
 
 .search-bar {
@@ -36,6 +37,8 @@
 .card-margin {
     margin-top: 10px;
     margin-left: 10px;
+    border: 1px lightgreen;
+    border-style: solid;
 }
 
 .defaultCard {

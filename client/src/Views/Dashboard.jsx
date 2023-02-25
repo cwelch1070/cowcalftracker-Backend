@@ -3,6 +3,10 @@ import '../css/dashboard.css'
 
 const Dashboard = () => {
 
+    const Herd = () => {
+        
+    }
+
     return (
         <div>
             <div className='nav-bar-container'>
