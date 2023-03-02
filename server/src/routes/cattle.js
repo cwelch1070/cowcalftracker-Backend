@@ -32,4 +32,18 @@ router.get('/cattle/:id', async (req, res) => {
     }
 })
 
+router.delete('/cattle/:id', async (req, res) => {
+    try {
+        const cattle = await Cattle.findByIdAndDelete(req.params.id)
+
+        //COUNTS DOCUMENTS ON COW CREATION AND UPDATES HERD COUNT FIELD
+        const count = await Cattle.countDocuments({ herd: req.body.herdId})
+        const herd = await Herd.findByIdAndUpdate(req.body.herdId, { numOfCattle: count })
+
+        res.status(200).send({messge: 'Cow was successfully deleted'})
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
 module.exports = router

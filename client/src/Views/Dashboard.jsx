@@ -3,8 +3,8 @@ import '../css/dashboard.css'
 
 const Dashboard = () => {
 
-    const Herd = () => {
-        
+    const createHerd = () => {
+        console.log('The New Herd button was clicked!')
     }
 
     return (
@@ -20,7 +20,7 @@ const Dashboard = () => {
             
             <div className='container'>
                 <div className='cards'>
-                    <div className='defaultCard card-margin'>
+                    <div className='defaultCard card-margin' onClick={createHerd}>
                         + New Herd
                     </div>
                     <div className='herdCard card-margin'>

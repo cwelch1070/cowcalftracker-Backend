@@ -48,6 +48,7 @@
     width: 18%;
     height: 125px;
     padding: 10px;
+    cursor: pointer;
 }
 
 .defaultCard:hover {
