@@ -12,12 +12,37 @@ const herdSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    creator: {
+    dateCreated: {
+        type: String,
+        required: true,
+        default: function() {
+            const date = new Date()
+            let day = date.getDate()
+            let month = date.getMonth()
+            let year = date.getFullYear()
+
+            let currentDate = `${month}/${day}/${year}`
+
+            return currentDate
+        },
+    },
+    creator: { 
         type: mongoose.Schema.ObjectId,
         required: true,
         ref: 'User'
     }
 })
+
+herdSchema.methods.setDate = function() {
+    const date = new Date()
+    let day = date.getDate()
+    let month = date.getMonth()
+    let year = date.getFullYear()
+
+    let currentDate = `${day}/${month}/${year}`
+
+    return currentDate
+}
 
 const Herd = mongoose.model('Herd', herdSchema)
 

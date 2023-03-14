@@ -27,7 +27,7 @@ router.get('/herd', auth, async (req, res) => {
     }
 })
 
-/* router.patch('/herd/:id', auth, async (req, res) => {
+/* router.patch('/herd/:id', auth, async (req, res) => { 
     const updates = Object.keys(req.body)
 
     try {
