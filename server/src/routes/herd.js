@@ -4,6 +4,7 @@ const Cattle = require('../models/cattle')
 const auth = require('../middleware/auth')
 const router = express.Router()
 
+//CREATE A NEW HERD
 router.post('/herd', auth, async (req, res) => {
     const herd = new Herd({
         ...req.body,
@@ -18,6 +19,7 @@ router.post('/herd', auth, async (req, res) => {
     }
 })
 
+//GET ALL HERDS ASSOCIATED WITH USER
 router.get('/herd', auth, async (req, res) => {
     try {
         const herd = await Herd.find({ creator: req.user._id}) 
@@ -27,7 +29,8 @@ router.get('/herd', auth, async (req, res) => {
     }
 })
 
-/* router.patch('/herd/:id', auth, async (req, res) => { 
+//UPDATE HERD
+router.patch('/herd/:id', auth, async (req, res) => { 
     const updates = Object.keys(req.body)
 
     try {
@@ -40,9 +43,9 @@ router.get('/herd', auth, async (req, res) => {
     } catch (e) {
         res.status(400).send(e)
     }
-}) */
+})
 
-//Deletes herd and all cattle associated with it
+//DELETES HERD AND ALL CATTLE ASSOCIATED WITH IT
 router.delete('/herd/:id', auth, async (req, res) => {
     try {
         const herd = await Herd.findByIdAndDelete(req.params.id)
