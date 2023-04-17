@@ -12,6 +12,11 @@ const cattleSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    notes: {
+        type: String,
+        trim: true,
+        default: 'N/A'
+    },
     herd: {
         type: mongoose.Schema.ObjectId,
         required: true,

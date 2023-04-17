@@ -3,6 +3,7 @@ const Cattle = require('../models/cattle')
 const Herd = require('../models/herds')
 const router = new express.Router()
 
+//CREATE HERD ROUTE
 router.post('/cattle', async (req, res) => {
     const cattle = new Cattle({
         ...req.body,
@@ -14,7 +15,7 @@ router.post('/cattle', async (req, res) => {
 
         //COUNTS DOCUMENTS ON COW CREATION AND UPDATES HERD COUNT FIELD
         const count = await Cattle.countDocuments({ herd: req.body.herdId})
-        const herd = await Herd.findByIdAndUpdate(req.body.herdId, { numOfCattle: count })
+        const herd = await Herd.findByIdAndUpdate(req.body.herdId, { numOfCattle: count }) 
        
         res.status(201).send(cattle)
     } catch (e) {
@@ -22,16 +23,34 @@ router.post('/cattle', async (req, res) => {
     }
 })
 
+//GET ALL CATTLE IN HERD
 router.get('/cattle/:id', async (req, res) => {
     try {
         const cattle = await Cattle.find({herd: req.params.id})
         
         res.status(200).send(cattle)
     } catch (e) {
-        
+        res.status(400).send('Error: ', e)
     }
 })
 
+//UPDATE COW
+router.patch('/cattle/:id', async (req, res) => { 
+    const updates = Object.keys(req.body)
+
+    try {
+        const _id = req.params.id
+        const cattle = await Cattle.findOne({_id, herdId: req.params.id})
+        updates.forEach((update) => cattle[update] = req.body[update])
+        await cattle.save()
+
+        res.status(200).send({message: 'Succesfully Updated'})
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+//DELETE COW IN HERD
 router.delete('/cattle/:id', async (req, res) => {
     try {
         const cattle = await Cattle.findByIdAndDelete(req.params.id)

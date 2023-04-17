@@ -13,7 +13,7 @@ router.post('/herd', auth, async (req, res) => {
     
     try {
         await herd.save()
-        res.status(201).send(herd)
+        res.status(201).send({message: 'Herd Successfully Created'})
     } catch (e) {
         res.status(400).send(e)
     }
