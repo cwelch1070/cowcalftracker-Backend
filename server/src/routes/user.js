@@ -4,7 +4,7 @@ const router = new express.Router()
 const auth = require('../middleware/auth')
 
 // Create User
-router.post('/user/create', async (req, res) => {
+router.post('/api/user/create', async (req, res) => {
     const user = new User(req.body)
 
     try {
@@ -19,7 +19,7 @@ router.post('/user/create', async (req, res) => {
 })
 
 // LOGIN USER
-router.post('/user/login', async (req, res) => {
+router.post('/api/user/login', async (req, res) => {
     try { 
         const user = await User.findByCredentials(req.body.email, req.body.password) 
         const token = await user.generateToken()

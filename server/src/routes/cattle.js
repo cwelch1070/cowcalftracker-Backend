@@ -4,7 +4,7 @@ const Herd = require('../models/herds')
 const router = new express.Router()
 
 //CREATE HERD ROUTE
-router.post('/cattle', async (req, res) => {
+router.post('/api/cattle', async (req, res) => {
     const cattle = new Cattle({
         ...req.body,
         herd: req.body.herdId
@@ -24,7 +24,7 @@ router.post('/cattle', async (req, res) => {
 })
 
 //GET ALL CATTLE IN HERD
-router.get('/cattle/:id', async (req, res) => {
+router.get('/api/cattle/:id', async (req, res) => {
     try {
         const cattle = await Cattle.find({herd: req.params.id})
         
@@ -35,7 +35,7 @@ router.get('/cattle/:id', async (req, res) => {
 })
 
 //UPDATE COW
-router.patch('/cattle/:id', async (req, res) => { 
+router.patch('/api/cattle/:id', async (req, res) => { 
     const updates = Object.keys(req.body)
 
     try {
@@ -51,7 +51,7 @@ router.patch('/cattle/:id', async (req, res) => {
 })
 
 //DELETE COW IN HERD
-router.delete('/cattle/:id', async (req, res) => {
+router.delete('/api/cattle/:id', async (req, res) => {
     try {
         const cattle = await Cattle.findByIdAndDelete(req.params.id)
 

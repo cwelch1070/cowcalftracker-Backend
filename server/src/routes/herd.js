@@ -5,7 +5,7 @@ const auth = require('../middleware/auth')
 const router = express.Router()
 
 //CREATE A NEW HERD
-router.post('/herd', auth, async (req, res) => {
+router.post('/api/herd', auth, async (req, res) => {
     const herd = new Herd({
         ...req.body,
         creator: req.user._id
@@ -20,7 +20,7 @@ router.post('/herd', auth, async (req, res) => {
 })
 
 //GET ALL HERDS ASSOCIATED WITH USER
-router.get('/herd', auth, async (req, res) => {
+router.get('/api/herd', auth, async (req, res) => {
     try {
         const herd = await Herd.find({ creator: req.user._id}) 
         res.status(200).send(herd)
@@ -30,7 +30,7 @@ router.get('/herd', auth, async (req, res) => {
 })
 
 //UPDATE HERD
-router.patch('/herd/:id', auth, async (req, res) => { 
+router.patch('/api/herd/:id', auth, async (req, res) => { 
     const updates = Object.keys(req.body)
 
     try {
@@ -46,7 +46,7 @@ router.patch('/herd/:id', auth, async (req, res) => {
 })
 
 //DELETES HERD AND ALL CATTLE ASSOCIATED WITH IT
-router.delete('/herd/:id', auth, async (req, res) => {
+router.delete('/api/herd/:id', auth, async (req, res) => {
     try {
         const herd = await Herd.findByIdAndDelete(req.params.id)
         const cattle = await Cattle.deleteMany({ herd: req.params.id})
