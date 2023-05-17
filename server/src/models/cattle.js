@@ -8,9 +8,8 @@ const cattleSchema = new mongoose.Schema({
         trim: true
     },
     tag: {
-        type: Number,
-        trim: true,
-        required: true
+        type: String,
+        trim: true
     },
     notes: {
         type: String,

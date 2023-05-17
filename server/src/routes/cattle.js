@@ -3,13 +3,23 @@ const Cattle = require('../models/cattle')
 const Herd = require('../models/herds')
 const router = new express.Router()
 
-//CREATE HERD ROUTE
+//CREATE Cattle ROUTE
 router.post('/api/cattle', async (req, res) => {
     const cattle = new Cattle({
         ...req.body,
         herd: req.body.herdId
     }) 
-    
+
+    // If an empty string for the name field is recieved set it to Cow
+    if(cattle.name === '') {
+        cattle.name = 'Cow'
+    }
+
+    // If an empty string is recieved for the note field set it to N/A
+    if(cattle.notes === '') {
+        cattle.notes = 'N/A'
+    }
+
     try {
         await cattle.save()
 
