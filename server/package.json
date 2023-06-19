@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
+    "post": "nodemon srcPostgreSQL/app.js",
     "database": "/Users/caleb/mongodb/bin/mongod.exe --dbpath=/Users/caleb/mongodb-data"
   },
   "author": "",
