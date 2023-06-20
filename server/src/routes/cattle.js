@@ -25,7 +25,7 @@ router.post('/api/cattle', async (req, res) => {
 
         //COUNTS DOCUMENTS ON COW CREATION AND UPDATES HERD COUNT FIELD
         const count = await Cattle.countDocuments({ herd: req.body.herdId})
-        const herd = await Herd.findByIdAndUpdate(req.body.herdId, { numOfCattle: count }) 
+        await Herd.findByIdAndUpdate(req.body.herdId, { numOfCattle: count }) 
        
         res.status(201).send(cattle)
     } catch (e) {
@@ -51,7 +51,7 @@ router.patch('/api/cattle/:id', async (req, res) => {
     try {
         const _id = req.params.id
         const cattle = await Cattle.findOne({_id, herdId: req.params.id})
-        updates.forEach((update) => cattle[update] = req.body[update])
+        updates.forEach((update) => cattle[update] = req.body[update]) 
         await cattle.save()
 
         res.status(200).send({message: 'Succesfully Updated'})
