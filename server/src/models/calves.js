@@ -16,6 +16,11 @@ const calvesSchema = new mongoose.Schema({
         trim: true,
         default: 'N/A'
     },
+    gender: {
+        type: String,
+        trim: true,
+        required: true
+    },
     birthDate: {
         type: Date,
         default: Date.now(),

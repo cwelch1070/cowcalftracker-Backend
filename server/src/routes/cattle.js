@@ -36,7 +36,7 @@ router.post('/api/cattle', async (req, res) => {
 //GET ALL CATTLE IN HERD
 router.get('/api/cattle/:id', async (req, res) => {
     try {
-        const cattle = await Cattle.find({herd: req.params.id})
+        const cattle = await Cattle.find({herd: req.params.id}) 
         
         res.status(200).send(cattle)
     } catch (e) {
