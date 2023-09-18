@@ -10,8 +10,14 @@ router.post('/api/calves', async (req, res) => {
         dam: req.body.dam
     })
 
+    console.log(calf.gender)
+
     try {
         await calf.save()
+
+        // Store gender of calf in Cattle scheme
+        const cattle = await Cattle.findByIdAndUpdate(req.body.dam, { calf: req.body.gender })
+        console.log(cattle)
 
         res.status(200).send(calf)
     } catch (error) {

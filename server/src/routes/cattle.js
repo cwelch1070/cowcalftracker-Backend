@@ -11,14 +11,10 @@ router.post('/api/cattle', async (req, res) => {
     }) 
 
     // If an empty string for the name field is recieved set it to Cow
-    if(cattle.name === '') {
-        cattle.name = 'Cow'
-    }
+    cattle.name = cattle.name === '' ? 'Cow' : cattle.name
 
     // If an empty string is recieved for the note field set it to N/A
-    if(cattle.notes === '') {
-        cattle.notes = 'N/A'
-    }
+    cattle.notes = cattle.notes === '' ? 'N/A' : cattle.notes
 
     try {
         await cattle.save()

@@ -11,6 +11,10 @@ const cattleSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    calf: {
+        type: String,
+        trim: true
+    },
     notes: {
         type: String,
         trim: true,
