@@ -1,4 +1,4 @@
-#TODO
+# TODO
 - Add default for calf fields
 - Decide on way to display calves to user
 - Consider deleting previous calf or adding it to a "History" document
@@ -6,7 +6,7 @@
 - Limit calf gender options to only two, Bull or Heifer
 - !Reimplement role call feature
 
-#Other Needed Changes
+# Other Needed Changes
 - Implement thrid party auth
 - Added more logging 
 - Track user logins
