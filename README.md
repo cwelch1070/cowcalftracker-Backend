@@ -11,3 +11,9 @@
 - Added more logging 
 - Track user logins
 - Implement email notifications for cattle updates
+
+# Feature Ideas
+- Create a chore/Todo portion of the app that works like the Jira software
+- The user can create and share todo's that need to be done like feeding, watering, pull calves or anthing farm or ranch related
+- Basically Jira for farmers
+- May work best as a seperate app with integration into cowcalftracker?
