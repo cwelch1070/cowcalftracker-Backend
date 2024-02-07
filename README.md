@@ -1,4 +1,4 @@
-# cowcalftracker.com REST API
+# [cowcalftracker.com](https://www.cowcalftracker.com) REST API
 Welcome to [cowcalftracker.com](https://www.cowcalftracker.com) a single page web application intended to make the everyday task of managing cattle more effecient and organized.
 
 ## Overview
