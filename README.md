@@ -20,7 +20,7 @@ The current goal for this repo is to continue development of additional feaures 
 2. Once you have the the repo cloned on your local machine, open the project in the editor of your choice.
 3. Open a command prompt and navigate to the directory the repo is stored in. In the `server` directory run `npm install` to install all needed dependencies.
 4. When this has finished you will then need to configure the connection to mongodb atlas. 
-```
+``` javascript
 const mongoose = require('mongoose')
 
 mongoose.set('strictQuery', true)
@@ -37,7 +37,7 @@ mongoose.connect(url, {})
 ```
 
 You can also setup mongodb locally rather than using the cloud solution
-```
+``` javascript
 const mongoose = require('mongoose')
 
 mongoose.set('strictQuery', true)
