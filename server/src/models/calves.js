@@ -1,17 +1,13 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const cattleSchema = new mongoose.Schema({
+const calvesSchema = new mongoose.Schema({
     name: {
         type: String,
-        default: 'Cow',
+        default: 'Calf',
         trim: true
     },
     tag: {
-        type: String,
-        trim: true
-    },
-    calf: {
         type: String,
         trim: true
     },
@@ -20,13 +16,23 @@ const cattleSchema = new mongoose.Schema({
         trim: true,
         default: 'N/A'
     },
-    herd: {
+    gender: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    birthDate: {
+        type: Date,
+        default: Date.now(),
+        trim: true
+    },
+    dam: {
         type: mongoose.Schema.ObjectId,
         required: true,
-        ref: 'Herd'
+        ref: 'Cattle'
     }
 })
 
-const Cattle = mongoose.model('Cattle', cattleSchema) 
+const Calves = mongoose.model('Calves', calvesSchema)  
   
-module.exports = Cattle
+module.exports = Calves

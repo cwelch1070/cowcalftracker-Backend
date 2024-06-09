@@ -11,21 +11,17 @@ router.post('/api/cattle', async (req, res) => {
     }) 
 
     // If an empty string for the name field is recieved set it to Cow
-    if(cattle.name === '') {
-        cattle.name = 'Cow'
-    }
+    cattle.name = cattle.name === '' ? 'Cow' : cattle.name
 
     // If an empty string is recieved for the note field set it to N/A
-    if(cattle.notes === '') {
-        cattle.notes = 'N/A'
-    }
+    cattle.notes = cattle.notes === '' ? 'N/A' : cattle.notes
 
     try {
         await cattle.save()
 
         //COUNTS DOCUMENTS ON COW CREATION AND UPDATES HERD COUNT FIELD
         const count = await Cattle.countDocuments({ herd: req.body.herdId})
-        const herd = await Herd.findByIdAndUpdate(req.body.herdId, { numOfCattle: count }) 
+        await Herd.findByIdAndUpdate(req.body.herdId, { numOfCattle: count }) 
        
         res.status(201).send(cattle)
     } catch (e) {
@@ -36,7 +32,7 @@ router.post('/api/cattle', async (req, res) => {
 //GET ALL CATTLE IN HERD
 router.get('/api/cattle/:id', async (req, res) => {
     try {
-        const cattle = await Cattle.find({herd: req.params.id})
+        const cattle = await Cattle.find({herd: req.params.id}) 
         
         res.status(200).send(cattle)
     } catch (e) {
@@ -51,7 +47,7 @@ router.patch('/api/cattle/:id', async (req, res) => {
     try {
         const _id = req.params.id
         const cattle = await Cattle.findOne({_id, herdId: req.params.id})
-        updates.forEach((update) => cattle[update] = req.body[update])
+        updates.forEach((update) => cattle[update] = req.body[update]) 
         await cattle.save()
 
         res.status(200).send({message: 'Succesfully Updated'})
