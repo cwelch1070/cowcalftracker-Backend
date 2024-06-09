@@ -2,9 +2,21 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 
 const recordsSchema = new mongoose.Schema({
+    cowName: {
+        type: String,
+        trim: true,
+        default: 'Cow'
+    },
     tag: {
         type: String,
         trim: true
+    },
+    accountedFor: {
+        type: Boolean,
+        default: false
+    },
+    date: {
+        type: String,
     },
     cowId: {
         type: mongoose.Schema.ObjectId,
@@ -15,8 +27,8 @@ const recordsSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         required: true,
         ref: 'Herd'
-    },
-}, { timestamps: true })
+    }
+})
 
 const Records  = mongoose.model('Records', recordsSchema) 
   
