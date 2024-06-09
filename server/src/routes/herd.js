@@ -48,8 +48,8 @@ router.patch('/api/herd/:id', auth, async (req, res) => {
 //DELETES HERD AND ALL CATTLE ASSOCIATED WITH IT
 router.delete('/api/herd/:id', auth, async (req, res) => {
     try {
-        const herd = await Herd.findByIdAndDelete(req.params.id)
-        const cattle = await Cattle.deleteMany({ herd: req.params.id})
+        await Herd.findByIdAndDelete(req.params.id)
+        await Cattle.deleteMany({ herd: req.params.id})
 
         res.status(200).send({message: 'Successfully deleted herd and all associated cattle'})
     } catch (e) {

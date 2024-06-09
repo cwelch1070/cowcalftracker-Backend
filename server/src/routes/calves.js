@@ -30,8 +30,7 @@ router.get('/api/calves/:id', async (req, res) => {
     try {
         const calves = await Calves.find({dam: req.params.id})
         console.log(calves)
-
-        res.status(200).send(calves) 
+        
     } catch (error) {
         res.status(400).send(error)
     }
